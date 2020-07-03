@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+.weatherNow,
+.today {
+	display: flex;
+	justify-content: space-between;
+}
+
+.weatherNow {
+	min-height: 50vh;
+	flex-direction: column;
+}

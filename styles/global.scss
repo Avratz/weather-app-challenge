@@ -1,0 +1,50 @@
+//index
+//0 - Base Styles / Resets
+//1 - Layout
+
+@import './variables';
+
+//*******************
+// 0 - Base Styles
+//*******************
+
+body {
+	margin: 0;
+	font-size: 62.5%;
+	font-family: sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: inline-flex;
+}
+
+//*******************
+// 1 - Layout
+//*******************
+
+.container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: $default-air;
+	padding-right: $default-air;
+}
+
+//*******************
+// 1 - Headers
+//*******************
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}

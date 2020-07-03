@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+.menu {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: $white;
+	border-top: $black100 1px solid;
+}
+.air {
+	padding: $default-air;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

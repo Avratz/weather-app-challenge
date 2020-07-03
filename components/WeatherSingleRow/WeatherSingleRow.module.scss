@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+.weatherSingleRow {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: $font-small;
+	h5 {
+		width: 40%;
+		margin: $default-air / 2 0;
+	}
+}
+
+.temperature {
+	width: 40%;
+	text-align: right;
+	span {
+		padding-left: $default-air;
+	}
+	&:first-child {
+		font-weight: bold;
+	}
+}

@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+.weatherByHours {
+	overflow-x: scroll;
+	border-top: $black100 1px solid;
+	border-bottom: $black100 1px solid;
+	font-size: $font-x-small;
+	li {
+		text-align: center;
+		padding: 0 $default-air;
+	}
+}

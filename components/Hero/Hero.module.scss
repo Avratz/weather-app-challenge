@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+.hero {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: $default-air * 2;
+	h3 {
+		font-size: $font-large;
+	}
+	h2 {
+		font-size: $font-xx-large;
+	}
+	h4 {
+		font-size: $font-small;
+	}
+}
