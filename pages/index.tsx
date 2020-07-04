@@ -1,23 +1,38 @@
+import { GetServerSideProps } from 'next'
+
 import Layout from '../components/Layout'
 import SingleCity from '../components/SingleCity/SingleCity.component'
+import Menu from '../components/Menu/Menu.component'
+
 import axios from 'axios'
 
-import { GetServerSideProps } from 'next'
-export default function Home({ localWeather, geoLocalization }) {
+import { getWeather } from '../controller/weather'
+import { CurrentWeather } from '../model/weather.model'
+
+export default function Home({ localWeather, hourlyWeather }) {
 	//check localWeather is not empty
-	if (Object.keys(localWeather).length === 0) {
+	if (
+		Object.keys(localWeather).length === 0 ||
+		Object.keys(hourlyWeather).length === 0
+	) {
 		return null
 	}
 	return (
-		<Layout title={'Weather App'}>
-			<SingleCity weatherToday={localWeather} />
+		<Layout title='Weather App' background='grey'>
+			<SingleCity
+				currentWeather={localWeather}
+				hourlyWeather={hourlyWeather.hourly}
+			/>
+			<Menu />
 		</Layout>
 	)
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	try {
-		let localWeather: { any } | {} = {}
+		let localWeather = {} // Current weather
+		let hourlyWeather = {}
+		let fullWeather = {} // hourly weather and for the next 7 days
 		let geoLocalization:
 			| {
 					status: string
@@ -35,14 +50,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		)
 		geoLocalization = getGeoLocalization
 
-		//check geoLocalization is not empty
-		if (Object.keys(geoLocalization).length > 0) {
-			const { data: getWeather } = await axios.get(
-				`http://api.openweathermap.org/data/2.5/weather?zip=${geoLocalization['zip']},${geoLocalization['countryCode']}&units=metric&APPID=${process.env.APP_ID}`
+		//check geoLocalization has the properties that we need
+		if (
+			geoLocalization.hasOwnProperty('lat') &&
+			geoLocalization.hasOwnProperty('lon')
+		) {
+			localWeather = await getWeather(
+				geoLocalization['lat'],
+				geoLocalization['lon'],
+				'current'
 			)
-			localWeather = getWeather
+			hourlyWeather = await getWeather(
+				geoLocalization['lat'],
+				geoLocalization['lon'],
+				'hourly'
+			)
 		}
-		return { props: { localWeather } }
+
+		return { props: { localWeather, hourlyWeather } }
 	} catch (err) {
 		console.error(err)
 	}

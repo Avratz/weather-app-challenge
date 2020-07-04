@@ -4,68 +4,35 @@ import WeatherByHours from '../WeatherByHours/WeatherByHours.component'
 import WeatherSingleRow from '../WeatherSingleRow/WeatherSingleRow.component'
 
 import { daysOfTheWeek } from '../../constants/daysOfTheWeek'
+import { CurrentWeather } from '../../model/weather.model'
 
-export default function WeatherNow({ weatherToday }) {
-	console.log(weatherToday)
-	const datos = {
-		city:
-			weatherToday.name.charAt(0).toUpperCase() +
-			weatherToday.name.toLowerCase().slice(1),
-		condition: weatherToday.weather[0].main,
-		temperature: Math.round(weatherToday.main.temp),
+export default function WeatherNow({
+	currentWeather,
+	hourlyWeather,
+}: {
+	currentWeather: CurrentWeather
+	hourlyWeather: CurrentWeather[]
+}) {
+	const heroProps = {
+		city: currentWeather.city,
+		condition: currentWeather.condition,
+		temperature: currentWeather.temperature,
 	}
-	const weatherByHours = [
-		{
-			hour: 'Ahora',
-			condition: 'Nublado',
-			temperature: 8,
-		},
-		{
-			hour: '12',
-			condition: 'Nublado',
-			temperature: 9,
-		},
-		{
-			hour: '13',
-			condition: 'Nublado',
-			temperature: 10,
-		},
-		{
-			hour: '15',
-			condition: 'Nublado',
-			temperature: 10,
-		},
-		{
-			hour: '16',
-			condition: 'Nublado',
-			temperature: 10,
-		},
-		{
-			hour: '16',
-			condition: 'Nublado',
-			temperature: 10,
-		},
-		{
-			hour: '17',
-			condition: 'Nublado',
-			temperature: 9,
-		},
-	]
 
 	const todayDate = new Date()
 
-	const weatherMinMax = {
+	const weatherFeelsLike = {
 		day: daysOfTheWeek[todayDate.getDay()],
-		minTemperature: Math.round(weatherToday.main.temp_min),
-		maxTemperature: Math.round(weatherToday.main.temp_max),
+		feelsLike: currentWeather.feelsLike,
 		today: true,
+		condition: currentWeather.condition,
 	}
 	return (
 		<div className={styles.weatherNow}>
-			<Hero {...datos} />
+			<Hero {...heroProps} />
 			<>
-				<WeatherSingleRow {...weatherMinMax} />
-				<WeatherByHours weatherByHours={weatherByHours} />
+				<WeatherSingleRow {...weatherFeelsLike} />
+				<WeatherByHours hourlyWeather={hourlyWeather} />
 			</>
 		</div>
 	)

@@ -7,30 +7,35 @@ const weatherFive = [
 		minTemperature: 4,
 		maxTemperature: 9,
 		today: false,
+		condition: 'Nublado',
 	},
 	{
 		day: 'Domingo',
 		minTemperature: 4,
 		maxTemperature: 9,
 		today: false,
+		condition: 'Nublado',
 	},
 	{
 		day: 'Lunes',
 		minTemperature: 4,
 		maxTemperature: 9,
 		today: false,
+		condition: 'Nublado',
 	},
 	{
 		day: 'Martes',
 		minTemperature: 4,
 		maxTemperature: 9,
 		today: false,
+		condition: 'Nublado',
 	},
 	{
 		day: 'Miercoles',
 		minTemperature: 4,
 		maxTemperature: 9,
 		today: false,
+		condition: 'Nublado',
 	},
 ]
 

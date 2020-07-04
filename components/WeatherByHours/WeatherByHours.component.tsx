@@ -1,24 +1,20 @@
 import styles from './WeatherByHours.module.scss'
 import WeatherIcon from '../WeatherIcon/WeatherIcon.component'
 
-type weatherSingle = {
-	hour: string
-	condition: string
-	temperature: number
-}
+import { CurrentWeather } from '../../model/weather.model'
 
 export default function WeatherByHours({
-	weatherByHours,
+	hourlyWeather,
 }: {
-	weatherByHours: weatherSingle[]
+	hourlyWeather: CurrentWeather[]
 }) {
-	if (weatherByHours.length <= 0) {
+	if (hourlyWeather.length <= 0) {
 		return <p>Cargando...</p>
 	}
 	return (
 		<div className={styles.weatherByHours}>
 			<ul>
-				{weatherByHours.map((weather: weatherSingle, index: number) => {
+				{hourlyWeather.map((weather: CurrentWeather, index: number) => {
 					return (
 						<li key={index}>
 							<p>{weather.hour}</p>

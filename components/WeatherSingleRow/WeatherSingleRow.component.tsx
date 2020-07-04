@@ -3,24 +3,27 @@ import WeatherIcon from '../WeatherIcon/WeatherIcon.component'
 
 export default function WeatherSingleRow({
 	day,
+	feelsLike,
+	today,
+	condition,
 	minTemperature,
 	maxTemperature,
-	today,
 }: {
 	day: string
-	minTemperature: number
-	maxTemperature: number
+	feelsLike?: number
 	today: boolean
+	condition: string
+	minTemperature?: number
+	maxTemperature?: number
 }) {
 	return (
 		<div className={styles.weatherSingleRow}>
 			<h5>
 				{day} {today && 'HOY'}
 			</h5>
-			{!today && <WeatherIcon condition='nublado' />}
+			{/*!today && <WeatherIcon condition={condition} />*/}
 			<div className={styles.temperature}>
-				<span>{maxTemperature}</span>
-				<span>{minTemperature}</span>
+				<span>ST: {feelsLike}°</span>
 			</div>
 		</div>
 	)
