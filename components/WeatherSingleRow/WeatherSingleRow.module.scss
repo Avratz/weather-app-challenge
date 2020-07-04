@@ -16,7 +16,7 @@
 	span {
 		padding-left: $default-air;
 	}
-	&:first-child {
+	span:first-child {
 		font-weight: bold;
 	}
 }

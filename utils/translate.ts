@@ -3,6 +3,7 @@ export function translateWeatherCondition(condition: string) {
 	const conditions = {
 		clouds: 'Nublado',
 		rain: 'Lluvia',
+		clear: 'Despejado',
 	}
 	return Object.keys(conditions).includes(conditionLower)
 		? conditions[conditionLower]

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { translateWeatherCondition } from '../utils/translate'
-import { getHour } from '../utils/conversion'
+import { getHour, getDay } from '../utils/conversion'
 import { CurrentWeather } from '../model/weather.model'
 const endPoint = 'https://api.openweathermap.org/data/2.5'
 
@@ -57,69 +57,36 @@ export async function getWeather(
 						}
 					}
 				}
-				console.log(weather)
+				return weather
+			case 'sevenDays':
+				{
+					const { data: getWeather } = await axios.get(
+						`${endPoint}/onecall?lat=${lat}&lon=${lon}&exclude=minutely,current,hourly&units=metric&APPID=${process.env.APP_ID}`
+					)
+
+					if (
+						getWeather.hasOwnProperty('daily') &&
+						getWeather['daily'].length > 0
+					) {
+						const sevenDays = getWeather.daily.map((day, index) => {
+							return {
+								today: index === 0 ? true : false,
+								day: getDay(day.dt),
+								condition: translateWeatherCondition(
+									day?.weather[0]?.main ?? ''
+								),
+								minTemperature: Math.round(day?.temp?.min),
+								maxTemperature: Math.round(day?.temp?.max),
+								clouds: day?.clouds,
+							}
+						})
+						weather = {
+							sevenDays,
+						}
+					}
+				}
 				return weather
 		}
-	} catch (err) {
-		console.error(err)
-	}
-}
-
-export async function getCurrentWeather(lat: number, lon: number) {
-	//This function calls to whe openweathermap API and gets the current weather for any given latitude and longitud.
-	//arguments are required and must be of type number
-	try {
-		let currentWeather: CurrentWeather | {} = {}
-
-		const { data: getWeather } = await axios.get(
-			`${endPoint}/weather?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&APPID=${process.env.APP_ID}`
-		)
-		if (getWeather.hasOwnProperty('cod') && getWeather['cod'] === 200) {
-			currentWeather = {
-				condition: translateWeatherCondition(
-					getWeather?.weather[0]?.main ?? ''
-				),
-				clouds: getWeather?.clouds?.all,
-				temperature: Math.round(getWeather?.main?.temp),
-				feelsLike: Math.round(getWeather?.main?.feels_like),
-				city: getWeather?.name,
-			}
-		}
-		return currentWeather
-	} catch (err) {
-		console.error(err)
-	}
-}
-
-export async function getHourlyWeather(lat: number, lon: number) {
-	//This function calls to whe openweathermap API and gets the hourly weather for any given latitude and longitud.
-	//arguments are required and must be of type number
-	try {
-		let hourlyWeather: { any } | {} = {}
-
-		const { data: getWeather } = await axios.get(
-			`${endPoint}/onecall?lat=${lat}&lon=${lon}&exclude=minutely,current,daily&units=metric&APPID=${process.env.APP_ID}`
-		)
-		hourlyWeather = getWeather
-
-		return hourlyWeather
-	} catch (err) {
-		console.error(err)
-	}
-}
-
-export async function getDailyWeather(lat: number, lon: number) {
-	//This function calls to whe openweathermap API and gets the daily weather for any given latitude and longitud.
-	//arguments are required and must be of type number
-	try {
-		let dailyWeather: { any } | {} = {}
-
-		const { data: getWeather } = await axios.get(
-			`${endPoint}/onecall?lat=${lat}&lon=${lon}&exclude=minutely,current,daily&units=metric&APPID=${process.env.APP_ID}`
-		)
-		hourlyWeather = getWeather
-
-		return hourlyWeather
 	} catch (err) {
 		console.error(err)
 	}

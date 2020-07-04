@@ -1,29 +1,21 @@
 import styles from './WeatherSingleRow.module.scss'
 import WeatherIcon from '../WeatherIcon/WeatherIcon.component'
-
+import { CurrentWeather } from '../../model/weather.model'
 export default function WeatherSingleRow({
-	day,
-	feelsLike,
-	today,
-	condition,
-	minTemperature,
-	maxTemperature,
+	weather,
 }: {
-	day: string
-	feelsLike?: number
-	today: boolean
-	condition: string
-	minTemperature?: number
-	maxTemperature?: number
+	weather: CurrentWeather
 }) {
+	const { day, today, condition, minTemperature, maxTemperature } = weather
 	return (
 		<div className={styles.weatherSingleRow}>
 			<h5>
 				{day} {today && 'HOY'}
 			</h5>
-			{/*!today && <WeatherIcon condition={condition} />*/}
+			{!today && <WeatherIcon condition={condition} />}
 			<div className={styles.temperature}>
-				<span>ST: {feelsLike}°</span>
+				<span>{maxTemperature}</span>
+				<span>{minTemperature}</span>
 			</div>
 		</div>
 	)

@@ -9,11 +9,16 @@ import axios from 'axios'
 import { getWeather } from '../controller/weather'
 import { CurrentWeather } from '../model/weather.model'
 
-export default function Home({ localWeather, hourlyWeather }) {
+export default function Home({
+	localWeather,
+	hourlyWeather,
+	sevenDaysWeather,
+}) {
 	//check localWeather is not empty
 	if (
 		Object.keys(localWeather).length === 0 ||
-		Object.keys(hourlyWeather).length === 0
+		Object.keys(hourlyWeather).length === 0 ||
+		Object.keys(sevenDaysWeather).length === 0
 	) {
 		return null
 	}
@@ -22,6 +27,7 @@ export default function Home({ localWeather, hourlyWeather }) {
 			<SingleCity
 				currentWeather={localWeather}
 				hourlyWeather={hourlyWeather.hourly}
+				sevenDaysWeather={sevenDaysWeather.sevenDays}
 			/>
 			<Menu />
 		</Layout>
@@ -32,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	try {
 		let localWeather = {} // Current weather
 		let hourlyWeather = {}
-		let fullWeather = {} // hourly weather and for the next 7 days
+		let sevenDaysWeather = {} // hourly weather and for the next 7 days
 		let geoLocalization:
 			| {
 					status: string
@@ -65,9 +71,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 				geoLocalization['lon'],
 				'hourly'
 			)
+			sevenDaysWeather = await getWeather(
+				geoLocalization['lat'],
+				geoLocalization['lon'],
+				'sevenDays'
+			)
 		}
 
-		return { props: { localWeather, hourlyWeather } }
+		return { props: { localWeather, hourlyWeather, sevenDaysWeather } }
 	} catch (err) {
 		console.error(err)
 	}

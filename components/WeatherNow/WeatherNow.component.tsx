@@ -19,19 +19,11 @@ export default function WeatherNow({
 		temperature: currentWeather.temperature,
 	}
 
-	const todayDate = new Date()
-
-	const weatherFeelsLike = {
-		day: daysOfTheWeek[todayDate.getDay()],
-		feelsLike: currentWeather.feelsLike,
-		today: true,
-		condition: currentWeather.condition,
-	}
 	return (
 		<div className={styles.weatherNow}>
 			<Hero {...heroProps} />
 			<>
-				<WeatherSingleRow {...weatherFeelsLike} />
+				<WeatherSingleRow weather={currentWeather} />
 				<WeatherByHours hourlyWeather={hourlyWeather} />
 			</>
 		</div>
