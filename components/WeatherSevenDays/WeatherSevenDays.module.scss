@@ -1,5 +1,5 @@
 .weatherSevenDays {
-	min-height: 50vh;
+	min-height: calc(50vh - 78px);
 	ul {
 		flex-direction: column;
 		width: 100%;

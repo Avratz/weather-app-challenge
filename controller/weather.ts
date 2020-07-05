@@ -5,8 +5,8 @@ import { CurrentWeather } from '../model/weather.model'
 const endPoint = 'https://api.openweathermap.org/data/2.5'
 
 export async function getWeather(
-	lat: number,
-	lon: number,
+	lat: string,
+	lon: string,
 	periodOfTime: string
 ) {
 	//This function calls to whe openweathermap API and gets the weather for any given latitude and longitud and period of time.
@@ -89,5 +89,6 @@ export async function getWeather(
 		}
 	} catch (err) {
 		console.error(err)
+		return 'error'
 	}
 }
