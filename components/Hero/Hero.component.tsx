@@ -13,7 +13,7 @@ export default function Hero({
 		<div className={styles.hero}>
 			{city && <h3>{city}</h3>}
 			{condition && <h4>{condition}</h4>}
-			{temperature && <h2>{temperature}°</h2>}
+			{temperature !== undefined ? <h2>{temperature}°</h2> : ''}
 		</div>
 	)
 }

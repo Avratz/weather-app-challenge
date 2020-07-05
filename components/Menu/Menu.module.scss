@@ -16,5 +16,8 @@
 }
 
 .menuIcon {
-	padding: $default-air;
+	svg {
+		padding: $default-air;
+		font-size: 3rem;
+	}
 }

@@ -4,6 +4,7 @@ export function translateWeatherCondition(condition: string) {
 		clouds: 'Nublado',
 		rain: 'Lluvia',
 		clear: 'Despejado',
+		snow: 'Nieve',
 	}
 	return Object.keys(conditions).includes(conditionLower)
 		? conditions[conditionLower]
