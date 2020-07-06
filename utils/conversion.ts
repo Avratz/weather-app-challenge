@@ -4,16 +4,16 @@ export function getHour(dt: number) {
 
 export function getDay(dt: number) {
 	const daysOfTheWeek = {
-		Mon: 'Lunes',
-		Tue: 'Martes',
-		Wed: 'Miercoles',
-		Thu: 'Jueves',
-		Fri: 'Viernes',
-		Sat: 'Sábado',
-		Sun: 'Domingo',
+		Monday: 'Lunes',
+		Tuesday: 'Martes',
+		Wednesday: 'Miercoles',
+		Thursday: 'Jueves',
+		Friday: 'Viernes',
+		Saturday: 'Sábado',
+		Sunday: 'Domingo',
 	}
-
+	console.log(new Date(dt * 1000).toLocaleString('en-US', { weekday: 'long' }))
 	return daysOfTheWeek[
-		new Date(dt * 1000).toLocaleString(undefined, { weekday: 'long' })
+		new Date(dt * 1000).toLocaleString('en-US', { weekday: 'long' })
 	]
 }
