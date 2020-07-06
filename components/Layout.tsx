@@ -14,8 +14,12 @@ export default function Layout({
 			<Head>
 				<title>{title}</title>
 				<link rel='icon' href='/favicon.ico' />
+				<meta
+					name='viewport'
+					content='width=device-width, initial-scale=1, maximum-scale=1'
+				/>
 			</Head>
-			{children}
+			<div className='wrapper'>{children}</div>
 		</main>
 	)
 }

@@ -36,7 +36,11 @@ export default function CityCompact({
 				showScreen('SingleCity') //show the screen of the city
 			}}
 		>
-			<h3>{city.name}</h3>
+			<div>
+				<h4>{city.condition}</h4>
+				<h1>{city.name}</h1>
+			</div>
+
 			<h2>{city.temperature}°</h2>
 		</div>
 	)

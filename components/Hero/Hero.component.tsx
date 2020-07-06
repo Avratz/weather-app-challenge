@@ -1,4 +1,5 @@
 import styles from './Hero.module.scss'
+import WeatherIcon from '../WeatherIcon/WeatherIcon.component'
 
 export default function Hero({
 	city,
@@ -11,9 +12,16 @@ export default function Hero({
 }) {
 	return (
 		<div className={styles.hero}>
-			{city && <h3>{city}</h3>}
-			{condition && <h4>{condition}</h4>}
-			{temperature !== undefined ? <h2>{temperature}°</h2> : ''}
+			<div className={styles.city}>
+				{city && <h1>{city}</h1>}
+				{condition && <h4>{condition}</h4>}
+			</div>
+			<div className={styles.temperature}>
+				<div className={styles.icon}>
+					<WeatherIcon className='font-medium' condition={condition} />
+				</div>
+				{temperature !== undefined ? <h2>{temperature}°</h2> : ''}
+			</div>
 		</div>
 	)
 }

@@ -24,7 +24,7 @@ export default function AddCity({ setCoord, showScreen, cities }) {
 				placeholder='Buscar...'
 			/>
 
-			<div className=''>
+			<div className={styles.results}>
 				{keyWord && <h3>Resultados para {keyWord}</h3>}
 				{searchData.map((city) => {
 					return (

@@ -11,8 +11,11 @@ export default function Menu({ showScreen, screen }) {
 	}
 	return (
 		<div className={styles.menu}>
-			<div className={styles.air}>
-				<img src='' alt='' />
+			<div className={styles.air + ' wrapper'}>
+				<img
+					src='https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png'
+					alt='Powered by Openweathermap'
+				/>
 				<div className={styles.menuIcon}>
 					<IoIosList
 						onClick={() => showScreen('ListOfCities')}

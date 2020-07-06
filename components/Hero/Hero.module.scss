@@ -1,17 +1,51 @@
 @import '../../styles/variables';
+@import '../../styles//mixins';
+
 .hero {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	padding: $default-air * 2;
-	h3 {
+	text-align: center;
+	@include breakpoint-desktop() {
+		flex-direction: row;
+		justify-content: space-between;
+		padding: $default-air * 4 0 0;
+	}
+	h1 {
 		font-size: $font-large;
+		padding-bottom: 1rem;
+		@include breakpoint-desktop() {
+			font-size: $font-x-large;
+		}
 	}
 	h2 {
 		font-size: $font-xx-large;
 	}
 	h4 {
 		font-size: $font-small;
+		@include breakpoint-desktop() {
+			font-size: $font-large;
+		}
+	}
+}
+
+.city {
+	@include breakpoint-desktop() {
+		text-align: left;
+	}
+}
+
+.icon {
+	display: none;
+	@include breakpoint-desktop() {
+		display: block;
+	}
+}
+
+.temperature {
+	@include breakpoint-desktop() {
+		display: flex;
 	}
 }

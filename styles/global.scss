@@ -1,8 +1,10 @@
 //index
 //0 - Base Styles / Resets
 //1 - Layout
+//2 - background
 
 @import './variables';
+@import './mixins';
 
 //*******************
 // 0 - Base Styles
@@ -31,10 +33,27 @@ ul {
 
 .container {
 	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
 	padding-bottom: $default-air * 4;
 	min-height: 85vh;
+	@include breakpoint-desktop() {
+		margin-top: 54px;
+		min-height: calc(100vh - 54px);
+		padding-bottom: 0;
+	}
+}
+
+.wrapper {
+	width: 100%;
+	@include breakpoint-tablet() {
+		width: 768px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	@include breakpoint-desktop() {
+		width: 900px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 //*******************
@@ -49,6 +68,9 @@ h6 {
 	margin: 0;
 }
 
+.font-medium {
+	font-size: $font-xx-large;
+}
 //****************
 // 2 - background
 //****************

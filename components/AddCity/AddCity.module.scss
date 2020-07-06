@@ -1,0 +1,36 @@
+@import '../../styles/variables';
+.addCity {
+	width: 100%;
+	height: 75vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	input {
+		background: none;
+		border: none;
+		outline: none;
+		border: solid 1px $Primary;
+		color: black;
+		padding: $default-air;
+		font-size: $font-small;
+		width: 80%;
+		&:focus {
+			border: solid 1px $Secondary;
+		}
+	}
+}
+
+.results {
+	width: 100%;
+	text-align: center;
+	h3 {
+		font-size: $font-small;
+		padding: $default-air 0 $default-air / 6;
+	}
+	p {
+		font-size: $font-small;
+		padding: $default-air / 8 0 $default-air / 8;
+		cursor: pointer;
+	}
+}
