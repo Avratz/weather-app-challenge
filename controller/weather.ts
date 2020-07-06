@@ -86,6 +86,8 @@ export async function getWeather(
 					}
 				}
 				return weather
+			default:
+				return weather
 		}
 	} catch (err) {
 		console.error(err)

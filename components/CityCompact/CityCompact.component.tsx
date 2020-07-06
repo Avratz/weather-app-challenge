@@ -1,33 +1,43 @@
 import styles from './CityCompact.module.scss'
+import { type } from '../../store/actions'
 
 export default function CityCompact({
 	city,
-	temperature,
 	setCoord,
-	coords,
-	setVisible,
 	actualCoord,
+	showScreen,
+	dispatch,
 }: {
-	city: string
-	temperature: number
+	city: {
+		coords: { lat: number; lon: number }
+		temperature: number
+		name: string
+		condition: string
+	}
 	setCoord: any
-	coords: { lat: number; lon: number }
-	setVisible: any
 	actualCoord: { lat: number; lon: number }
+	showScreen: any
+	dispatch: any
 }) {
 	return (
 		<div
-			className={styles.cityCompact}
+			className={styles.cityCompact + ' ' + city.condition}
 			onClick={() => {
-				if (actualCoord.lat !== coords.lat || actualCoord.lon !== coords.lon) {
-					setCoord({ ...coords })
+				//if the actual coords in the state are not equal to the coords of the actual city
+				if (
+					actualCoord.lat !== city.coords.lat ||
+					actualCoord.lon !== city.coords.lon
+				) {
+					setCoord({ ...city.coords }) // we update the state, this triggers useEffect and we fetch new the new data
+					dispatch({
+						type: type.LOADING,
+					})
 				}
-
-				setVisible()
+				showScreen('SingleCity') //show the screen of the city
 			}}
 		>
-			<h3>{city}</h3>
-			<h2>{temperature}°</h2>
+			<h3>{city.name}</h3>
+			<h2>{city.temperature}°</h2>
 		</div>
 	)
 }

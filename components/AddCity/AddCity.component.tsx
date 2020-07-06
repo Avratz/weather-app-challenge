@@ -1,24 +1,16 @@
 import styles from './AddCity.module.scss'
 import { useState } from 'react'
-import { IoIosList } from 'react-icons/io'
 
 import { searchByKeyword } from '../../controller/search'
 
-export default function AddCity({
-	setCoord,
-	actualCoord,
-	handleAddCity,
-	handleClick,
-	newCity,
-	visible,
-}) {
+export default function AddCity({ setCoord, showScreen, cities }) {
 	const [searchData, setSearchData] = useState([])
 	const [keyWord, setKey] = useState('')
 	const handleChange = async (event) => {
 		event.preventDefault()
 		setKey(event.target.value)
-		const searchData = await searchByKeyword(event.target.value)
-		setSearchData(searchData)
+		const searchD = await searchByKeyword(event.target.value)
+		setSearchData(searchD)
 	}
 
 	return (
@@ -39,14 +31,10 @@ export default function AddCity({
 						<p
 							key={city.id}
 							onClick={() => {
-								if (
-									actualCoord.lat !== city.coord.lat ||
-									actualCoord.lon !== city.coord.lon
-								) {
+								if (!cities.find((cityState) => cityState.name === city.name)) {
 									setCoord({ ...city.coord })
 								}
-								handleAddCity(!newCity)
-								handleClick(!visible)
+								showScreen('ListOfCities')
 							}}
 						>
 							{city.name}, {city.country}

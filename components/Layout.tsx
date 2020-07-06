@@ -3,14 +3,14 @@ import Head from 'next/head'
 export default function Layout({
 	children,
 	title,
-	background,
+	className,
 }: {
 	children: React.ReactNode
 	title: string
-	background?: string
+	className?: string
 }) {
 	return (
-		<main className='container'>
+		<main className={`container ${className}`}>
 			<Head>
 				<title>{title}</title>
 				<link rel='icon' href='/favicon.ico' />

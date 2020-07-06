@@ -4,19 +4,21 @@ import CityCompact from '../CityCompact/CityCompact.component'
 export default function ListOfCities({
 	cities,
 	setCoord,
-	setVisible,
+	showScreen,
 	actualCoord,
+	dispatch,
 }) {
 	return (
 		<div className={styles.listOfCities}>
-			{cities.map((city, index) => {
+			{cities.map((city) => {
 				return (
 					<CityCompact
-						key={index}
-						{...city}
+						key={city.id}
+						city={city}
 						setCoord={setCoord}
 						actualCoord={actualCoord}
-						setVisible={() => setVisible()}
+						showScreen={showScreen}
+						dispatch={dispatch}
 					/>
 				)
 			})}

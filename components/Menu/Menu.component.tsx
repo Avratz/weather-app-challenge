@@ -5,32 +5,30 @@ import {
 	IoIosArrowDropleft,
 } from 'react-icons/io'
 
-export default function Menu({ handleClick, visible, handleAddCity, newCity }) {
+export default function Menu({ showScreen, screen }) {
+	const show = (screenToShow) => {
+		return screen === screenToShow ? { display: 'inline' } : { display: 'none' }
+	}
 	return (
 		<div className={styles.menu}>
 			<div className={styles.air}>
 				<img src='' alt='' />
 				<div className={styles.menuIcon}>
 					<IoIosList
-						onClick={() => handleClick(!visible)}
-						style={
-							visible || newCity ? { display: 'none' } : { display: 'inline' }
-						}
+						onClick={() => showScreen('ListOfCities')}
+						style={show('SingleCity')}
 					/>
 					<IoIosAddCircleOutline
 						onClick={() => {
-							handleAddCity(!newCity)
+							showScreen('AddCity')
 						}}
-						style={
-							!visible || newCity ? { display: 'none' } : { display: 'inline' }
-						}
+						style={show('ListOfCities')}
 					/>
 					<IoIosArrowDropleft
 						onClick={() => {
-							handleAddCity(!newCity)
-							handleClick(!visible)
+							showScreen('SingleCity')
 						}}
-						style={!newCity ? { display: 'none' } : { display: 'inline' }}
+						style={show('AddCity')}
 					/>
 				</div>
 			</div>
