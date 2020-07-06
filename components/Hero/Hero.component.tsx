@@ -18,7 +18,7 @@ export default function Hero({
 			</div>
 			<div className={styles.temperature}>
 				<div className={styles.icon}>
-					<WeatherIcon className='font-medium' condition={condition} />
+					<WeatherIcon className='font-xx-large' condition={condition} />
 				</div>
 				{temperature !== undefined ? <h2>{temperature}°</h2> : ''}
 			</div>

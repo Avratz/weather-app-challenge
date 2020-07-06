@@ -37,18 +37,12 @@ export default function Home() {
 		let refreshWeatherInterval
 		const fetchGeoLocalization = async () => {
 			let { data: getGeoLocalization } = await axios.get(
-				'http://ip-api.com/json/?fields=status,lat,lon'
+				'https://ipapi.co/json/'
 			)
-			if (getGeoLocalization.status !== 'success') {
-				getGeoLocalization = {
-					status: 'success',
-					lat: -34.603722,
-					lon: -58.381592,
-				} //if fails to load the GeoLocalization, show this as default.
-			}
+
 			setCoord({
-				lat: getGeoLocalization.lat,
-				lon: getGeoLocalization.lon,
+				lat: getGeoLocalization.latitude,
+				lon: getGeoLocalization.longitude,
 			})
 		}
 
