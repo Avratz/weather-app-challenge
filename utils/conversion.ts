@@ -1,5 +1,8 @@
 export function getHour(dt: number) {
-	return new Date(dt * 1000).toLocaleString(undefined, { hour: 'numeric' })
+	return new Date(dt * 1000).toLocaleString('en-US', {
+		hour: 'numeric',
+		hour12: false,
+	})
 }
 
 export function getDay(dt: number) {
